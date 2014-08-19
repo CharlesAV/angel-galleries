@@ -1,2 +1,2 @@
-galleries
+angel-galleries
 =========
