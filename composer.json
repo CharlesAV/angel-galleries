@@ -1,0 +1,26 @@
+{
+    "name": "angel/galleries",
+    "description": "",
+    "authors": [
+        {
+            "name": "Charles Konsor",
+            "email": "charles@angelvisiontech.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.1.*",
+        "angel/core": "dev-master"
+    },
+    "autoload": {
+        "classmap": [
+            "src/migrations",
+            "src/controllers",
+            "src/models"
+        ],
+        "psr-0": {
+            "Angel\\Galleries\\": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
