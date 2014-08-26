@@ -1,7 +1,7 @@
 <?php namespace Angel\Galleries;
 
 use Angel\Core\LinkableModel;
-use App, Config;
+use App, Config, Image;
 
 class GalleryItem extends LinkableModel {
 	public $table = "galleries_items";
@@ -32,6 +32,20 @@ class GalleryItem extends LinkableModel {
 		$Change::where('fmodel', 'GalleryItem')
 			        ->where('fid', $this->id)
 			        ->delete();
+			        
+		// Thumbs
+		/*if($this->file) {
+			# Should really check if these are used anywhere else, but no easy way to do that in other modules yet so just leaving them for now
+			
+			// Name
+			$name = basename(public_path().$this->file);
+			
+			// Thumbs
+			$thumbs = Config::get('galleries::thumbs');
+			foreach($thumbs as $k => $v) {
+				if(file_exists(public_path().$v['path'].$name)) unlink(public_path().$v['path'].$name);
+			}
+		}*/
 	}
 
 	///////////////////////////////////////////////
@@ -49,5 +63,58 @@ class GalleryItem extends LinkableModel {
 	public function link_edit()
 	{
 		return admin_url('galleries/' . $this->gallery_id . '/items/edit/' . $this->id);
+	}
+	
+	function thumbs() {
+		if(!$this->file) return;
+		
+		// Name
+		$name = basename(public_path().$this->file);
+		
+		// Thumbs
+		$thumbs = Config::get('galleries::thumbs');
+		foreach($thumbs as $k => $v) {
+			// Image
+			$image = Image::make(public_path().$this->file);
+			
+			// Resize
+			if(!$v['crop'] and !$v['enlarge']) $image->resize($v['width'], $v['height'],function($constraint) {
+				$constraint->aspectRatio();
+				$constraint->upsize();
+			});
+			else if(!$v['crop']) $image->resize($v['width'], $v['height'],function($constraint) {
+				$constraint->aspectRatio();
+			});
+			else if(!$v['enlarge']) $image->resize($v['width'], $v['height'],function($constraint) {
+				$constraint->upsize();
+			});
+			else $image->resize($v['width'], $v['height']);
+			/*$image->resize($v['width'], $v['height'],function($constraint) {
+				if(!$v['crop']) $constraint->aspectRatio();
+				if(!$v['enlarge']) $constraint->upsize();
+			});*/
+			
+			// Save
+			$image->save(public_path().$v['path'].$name);
+		}
+	}
+	
+	function thumb($k) {
+		if(!$this->file) return;
+		
+		// Name
+		$name = basename(public_path().$this->file);
+		
+		// Thumb
+		$v = Config::get('galleries::thumbs.'.$k);
+		
+		// URL
+		$url = $v['path'].$name;
+		
+		// Exists?
+		if(!file_exists(public_path().$url)) return;
+		
+		// Return
+		return $url;
 	}
 }

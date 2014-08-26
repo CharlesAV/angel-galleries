@@ -10,7 +10,8 @@
     "require": {
         "php": ">=5.3.0",
         "illuminate/support": "4.1.*",
-        "angel/core": "dev-master"
+        "angel/core": "dev-master",
+        "intervention/image": "2.*"
     },
     "autoload": {
         "classmap": [

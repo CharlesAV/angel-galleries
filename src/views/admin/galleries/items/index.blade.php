@@ -45,6 +45,7 @@
 						@if (Config::get('core::languages') && !$single_language)
 						<th style="width:60px;">Copy</th>
 						@endif
+						<th style="width:{{ Config::get('galleries::thumbs.t.width') }}px;">Image</th>
 						<th>Name</th>
 					</tr>
 				</thead>
@@ -65,12 +66,13 @@
 						@if (Config::get('core::languages') && !$single_language)
 							<td>{{ Form::checkbox('ids[]', $item->id, false, array('class'=>'idCheckbox')) }}</td>
 						@endif
+							<td><img src="{{ $item->thumb('t') }}" /></td>
 							<td>{{ $item->name }}</td>
 						</tr>
 					@endforeach
 				@else 
 					<tr>
-						<td colspan="4" align="center" style="padding:30px;">
+						<td colspan="5" align="center" style="padding:30px;">
 							No Gallery Items Found.
 						</td>
 					</tr>

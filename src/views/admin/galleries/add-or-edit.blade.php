@@ -116,7 +116,7 @@
 						'' => '',
 						'page' => 'Page',
 						'modal' => 'Modal',
-						'slide-down' => 'Slide Down'
+						'expand' => 'Expand'
 					);
 					?>
 					<tr>

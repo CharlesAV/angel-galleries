@@ -89,6 +89,8 @@ class AdminGalleryItemController extends AngelController {
 		}
 		$object->gallery_id = $gallery;
 		$object->save();
+		
+		if($object->file) $object->thumbs();
 
 		if (method_exists($this, 'after_save')) $this->after_save($object);
 
@@ -122,7 +124,8 @@ class AdminGalleryItemController extends AngelController {
 
 		$object  = $GalleryItem::withTrashed()->findOrFail($id);
 		$changes = array();
-
+		$thumb = 0;
+		
 		foreach (static::columns() as $column) {
 			$new_value = Input::get($column);
 
@@ -132,10 +135,13 @@ class AdminGalleryItemController extends AngelController {
 					'new' => $new_value
 				);
 			}
+			if($column == "file" and $object->{$column} != $new_value) $thumb = 1;
 
 			$object->{$column} = $new_value;
 		}
 		$object->save();
+		
+		if($thumb) $object->thumbs();
 
 		if (method_exists($this, 'after_save')) $this->after_save($object, $changes);
 
