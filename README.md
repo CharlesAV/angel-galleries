@@ -21,8 +21,8 @@ Add the following service provider to your `providers` array in `app/config/app.
 'Intervention\Image\ImageServiceProvider'
 ```
 
-Add the following alias to your `alias` array in `app/config/app.php`:
-```php,
+Add the following alias to your `aliases` array in `app/config/app.php`:
+```php
 'Image' 		  => 'Intervention\Image\Facades\Image'
 ```
 
@@ -88,4 +88,4 @@ array(
 )
 ```
 
-Make sure you actually create the directories where the thumbnail images will be saved. These paths are relative to the /public/ folder (ex: /public/uploads/images/t/).
+Finally, make sure you actually __create the directories where the thumbnail images will be saved__. These paths are relative to the /public/ folder (ex: /public/uploads/images/t/).
