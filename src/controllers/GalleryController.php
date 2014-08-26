@@ -34,7 +34,7 @@ class GalleryController extends \Angel\Core\AngelController {
 		$gallery = $this->Gallery
 			->where('slug', $slug)
 			->first();
-		if (!$gallery || !$gallery->is_published()) App::abort(404);
+		if (!$gallery) App::abort(404);
 		$this->data['gallery'] = $gallery;
 		
 		// Return
@@ -54,7 +54,7 @@ class GalleryController extends \Angel\Core\AngelController {
 			->where('language_id', $language->id)
 			->where('slug', $slug)
 			->first();
-		if (!$gallery || !$gallery->is_published()) App::abort(404);
+		if (!$gallery) App::abort(404);
 		$this->data['active_language'] = $language;
 		$this->data['gallery'] = $gallery;
 

@@ -3,11 +3,9 @@
 @section('title', ucfirst($action).' Gallery Item')
 
 @section('css')
-	{{ HTML::style('packages/angel/core/js/jquery/jquery.datetimepicker.css') }}
 @stop
 
 @section('js')
-	{{ HTML::script('packages/angel/core/js/ckeditor/ckeditor.js') }}
 @stop
 
 @section('content')
@@ -25,10 +23,6 @@
 		{{ Form::model($item, array('role'=>'form')) }}
 	@elseif ($action == 'add')
 		{{ Form::open(array('role'=>'form')) }}
-	@endif
-
-	@if (isset($menu_id))
-		{{ Form::hidden('menu_id', $menu_id) }}
 	@endif
 
 	<div class="row">
@@ -63,7 +57,19 @@
 							{{ Form::label('description', 'Description') }}
 						</td>
 						<td>
-							{{ Form::textarea('html', null, array('class'=>'ckeditor')) }}
+							<div style="width:300px">
+								{{ Form::textarea('description') }}
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span class="required">*</span>	
+							{{ Form::label('file', 'Image') }}
+						</td>
+						<td>
+							{{ Form::text('file', NULL, array('class'=>'form-control','style' => "float:left;width:300px;")) }}
+							<button type="button" class="btn btn-default imageBrowse" style="float:left">Browse...</button>
 						</td>
 					</tr>
 				</tbody>

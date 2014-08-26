@@ -20,7 +20,7 @@ class Gallery extends LinkableModel {
 	}
 	public function items()
 	{
-		return $this->hasMany(App::make('GalleryItem'));
+		return $this->hasMany(App::make('GalleryItem'))->orderBy('order','asc');
 	}
 
 	// Handling relationships in controller CRUD methods

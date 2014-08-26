@@ -70,7 +70,7 @@
 					@endforeach
 				@else 
 					<tr>
-						<td colspan="4" align="center">
+						<td colspan="4" align="center" style="padding:30px;">
 							No Gallery Items Found.
 						</td>
 					</tr>

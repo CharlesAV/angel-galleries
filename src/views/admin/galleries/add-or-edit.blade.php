@@ -89,7 +89,7 @@
 					</tr>
 					<tr>
 						<td>
-							{{ Form::label('description', 'Description') }}
+							{{ Form::label('html', 'Description') }}
 						</td>
 						<td>
 							{{ Form::textarea('html', null, array('class'=>'ckeditor')) }}

@@ -48,6 +48,6 @@ class GalleryItem extends LinkableModel {
 	}
 	public function link_edit()
 	{
-		return admin_url('galleries/' . $this->gallery_id . '/items/' . $this->id);
+		return admin_url('galleries/' . $this->gallery_id . '/items/edit/' . $this->id);
 	}
 }
