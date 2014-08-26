@@ -30,4 +30,4 @@ return array(
 			'path' => '/uploads/images/l/'
 		)
 	)
-);
+); 
